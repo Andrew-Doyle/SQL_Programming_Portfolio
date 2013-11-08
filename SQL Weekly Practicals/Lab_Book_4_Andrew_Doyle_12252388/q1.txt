@@ -1,0 +1,32 @@
+-- -------------------------- QUESTION 1 ---------------------------------
+
+-- SAMPLE PROCEDURE
+
+CREATE OR REPLACE PROCEDURE HelloWorldProc 
+IS
+BEGIN 
+	DBMS_OUTPUT.PUT_LINE('Hello world');
+END HelloWorldProc;
+/ 
+
+BEGIN 
+    HelloWorldProc(); 
+END; 
+/
+
+
+-- SAMPLE FUNCTION
+
+CREATE OR REPLACE FUNCTION HelloWorldFunc 
+RETURN NUMBER 
+IS 
+BEGIN 
+     DBMS_OUTPUT.PUT_LINE('Hello world'); 
+     RETURN 1; 
+END HelloWorldFunc; 
+/ 
+
+SELECT HelloWorldFunc() FROM DUAL;
+
+
+

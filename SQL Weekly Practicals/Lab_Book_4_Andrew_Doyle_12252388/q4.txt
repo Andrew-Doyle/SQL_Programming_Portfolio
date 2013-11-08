@@ -1,0 +1,17 @@
+-- -------------------------------------- QUESTION 4 ---------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE question4_lab_4 (vowels IN VARCHAR2)
+IS
+    vowelreplace VARCHAR2(50);
+BEGIN
+     SELECT TRANSLATE(vowels,'zaeiou', 'z') INTO vowelreplace FROM dual;
+     DBMS_OUTPUT.PUT_LINE (vowelreplace);
+
+END question4_lab_4;
+/
+
+BEGIN
+	question4_lab_4 ('  Quick frozen fox jumps over the lazy dog');
+ 
+END;
+/

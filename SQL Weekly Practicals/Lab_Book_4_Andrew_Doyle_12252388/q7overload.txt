@@ -1,0 +1,68 @@
+-- QUESTION 7
+
+CREATE OR REPLACE PACKAGE 	q7_package 
+AS 
+    FUNCTION q7_overloading ( n1 NUMBER, n2 NUMBER) RETURN NUMBER;
+    FUNCTION q7_overloading ( n1 NUMBER, n2 NUMBER, n3 NUMBER) RETURN NUMBER;
+    FUNCTION q7_overloading ( n1 NUMBER, n2 NUMBER, n3 NUMBER, n4 NUMBER) RETURN NUMBER;
+    FUNCTION q7_overloading ( n1 NUMBER, n2 NUMBER, n3 NUMBER, n4 NUMBER, n5 NUMBER) RETURN NUMBER;
+END;
+/
+
+CREATE OR REPLACE PACKAGE BODY q7_package 
+AS
+   FUNCTION q7_overloading ( n1 NUMBER, n2 NUMBER)
+   RETURN NUMBER
+   IS
+       Sumofnumbers NUMBER;    
+   BEGIN
+       SELECT SUM(n1+n2-1) INTO Sumofnumbers FROM DUAL;      
+       RETURN Sumofnumbers;
+   END q7_overloading;
+
+   FUNCTION q7_overloading ( n1 NUMBER, n2 NUMBER, n3 NUMBER)
+   RETURN NUMBER
+   IS
+       Sumofnumbers NUMBER;    
+   BEGIN
+       SELECT SUM(n1+n2+n3-1) INTO Sumofnumbers FROM DUAL;      
+       RETURN Sumofnumbers;
+     END q7_overloading;
+  
+  FUNCTION q7_overloading ( n1 NUMBER, n2 NUMBER, n3 NUMBER, n4 NUMBER)
+   RETURN NUMBER
+   IS
+       Sumofnumbers NUMBER;    
+   BEGIN
+       SELECT SUM(n1+n2+n3+n4-1) INTO Sumofnumbers FROM DUAL;      
+       RETURN Sumofnumbers;
+   END q7_overloading;
+   
+  FUNCTION q7_overloading ( n1 NUMBER, n2 NUMBER, n3 NUMBER, n4 NUMBER, n5 NUMBER)
+   RETURN NUMBER
+   IS
+       Sumofnumbers NUMBER;    
+   BEGIN
+       SELECT SUM(n1+n2+n3+n4+n5-1) INTO Sumofnumbers FROM DUAL;      
+       RETURN Sumofnumbers;
+     END q7_overloading;
+
+END;
+/
+
+DECLARE
+	result1 NUMBER;
+	result2 NUMBER;
+	result3 NUMBER;
+	result4 NUMBER;
+BEGIN
+	result1 := q7_package.q7_overloading(5,5);
+	result2 := q7_package.q7_overloading(5,5,5);
+        result3 := q7_package.q7_overloading(5,5,5,5);   
+	result4 := q7_package.q7_overloading(5,5,5,5,5); 
+        DBMS_OUTPUT.PUT_LINE(result1);
+	DBMS_OUTPUT.PUT_LINE(result2);
+	DBMS_OUTPUT.PUT_LINE(result3);
+	DBMS_OUTPUT.PUT_LINE(result4);
+END;
+/

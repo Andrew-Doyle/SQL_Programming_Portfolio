@@ -1,0 +1,49 @@
+-- QUESTION 6
+
+CREATE OR REPLACE FUNCTION question6_lab_4 ( n1 NUMBER, n2 NUMBER, n3 NUMBER, n4 NUMBER, n5 NUMBER)
+RETURN NUMBER
+IS
+   Sumofnumbers NUMBER;    
+BEGIN
+     SELECT SUM(n1+n2+n3+n4+n5-1) INTO Sumofnumbers FROM DUAL;      
+      RETURN Sumofnumbers;
+END question6_lab_4;
+/
+
+SELECT question6_lab_4(5,5,5,5,5) AS “Five Numbers Summed (less1)” FROM DUAL;
+
+-- FLEXIBLE FUNCTION ---------
+
+CREATE OR REPLACE FUNCTION question6_lab_4 (input sys.odcinumberlist)
+RETURN NUMBER
+IS
+Sumofnumbers NUMBER;    
+BEGIN
+Sumofnumbers := 0;
+FOR i IN input.FIRST..input.LAST LOOP
+Sumofnumbers := Sumofnumbers + input(i);
+END LOOP;
+Sumofnumbers := Sumofnumbers - 1;
+RETURN Sumofnumbers;
+END question6_lab_4;
+/
+
+SELECT question6_lab_4 (sys.odcinumberlist(5,5,5,5,5)) AS "Five Numbers less 1" FROM DUAL;
+
+-- FLEXIBLE FUNCTION - WITH EXTRA PARAMETERS TO DEMONSTRATE ITS FLEXIBILITY. 
+
+CREATE OR REPLACE FUNCTION question6_lab_4 (input sys.odcinumberlist)
+RETURN NUMBER
+IS
+Sumofnumbers NUMBER;    
+BEGIN
+Sumofnumbers := 0;
+FOR i IN input.FIRST..input.LAST LOOP
+Sumofnumbers := Sumofnumbers + input(i);
+END LOOP;
+Sumofnumbers := Sumofnumbers - 1;
+RETURN Sumofnumbers;
+END question6_lab_4;
+/
+
+SELECT question6_lab_4 (sys.odcinumberlist(5,5,5,5,5,20,45,90,102)) AS "Five Numbers less 1" FROM DUAL;

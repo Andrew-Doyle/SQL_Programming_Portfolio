@@ -1,0 +1,13 @@
+-- ------------------------------ QUESTION 5 ------------------------------------
+
+CREATE OR REPLACE FUNCTION question5_lab_4 ( twice NUMBER)
+RETURN NUMBER
+IS
+BEGIN
+      RETURN twice *;
+RETURN 1;
+END question5_lab_4;
+/
+
+SELECT question5_lab_4(5) AS “Number x2” FROM DUAL;
+

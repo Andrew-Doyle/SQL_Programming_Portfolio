@@ -1,0 +1,22 @@
+-- ------------------------ QUESTION2 --------------------------------------------------------
+
+
+CREATE OR REPLACE PROCEDURE question_2_lab_4 (firstname IN VARCHAR2, surname IN VARCHAR2)
+IS
+BEGIN 
+             DBMS_OUTPUT.PUT_LINE (LOWER (firstname)  || LOWER (surname)); 
+             DBMS_OUTPUT.PUT_LINE (UPPER (firstname)  || UPPER (surname)); 
+            DBMS_OUTPUT.PUT_LINE (INITCAP (firstname)  || INITCAP (surname)); 
+
+END question_2_lab_4;
+/ 
+set serveroutput on;
+BEGIN 
+   question_2_lab_4 (‘THOMAS’, ‘Doyle’);
+
+    
+END; 
+/
+
+
+

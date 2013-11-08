@@ -1,0 +1,2 @@
+SELECT fitness_plan.fitness_plan_name, sports_science.sports_scientist_name,sports_science.role
+FROM fitness_plan RIGHT OUTER JOIN sports_science ON fitness_plan.sports_scientist_id = sports_science.sports_scientist_id;

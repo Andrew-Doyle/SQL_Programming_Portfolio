@@ -1,0 +1,22 @@
+-- QUESTION 3
+
+CREATE OR REPLACE PROCEDURE question3_lab_4 (firstname IN VARCHAR2, surname IN VARCHAR2)
+IS
+    fullname VARCHAR2(50);
+    byte_numbers NUMBER;
+BEGIN
+     fullname := firstname || ' ' || surname;
+     DBMS_OUTPUT.PUT_LINE (TRIM(INITCAP (firstname))  || ' ' || TRIM(INITCAP (surname)));
+     SELECT VSIZE(fullname) INTO byte_numbers FROM dual;
+     DBMS_OUTPUT.PUT_LINE(byte_numbers);
+
+END question3_lab_4;
+/
+
+BEGIN
+	question3_lab_4 ('  aNDREW  ','  doyle  ');
+
+END;
+/
+
+

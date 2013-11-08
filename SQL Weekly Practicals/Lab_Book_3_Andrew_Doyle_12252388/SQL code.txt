@@ -1,0 +1,92 @@
+-------------------------------------- QUESTION 1 ------------------------------------------------------
+
+SET AUTOCOMMIT OFF;
+INSERT INTO customer (cust_nbr, fname, lname) VALUES ( 110, 'Wayne', 'Rooney');
+INSERT INTO customer (cust_nbr, fname, lname) VALUES ( 111, 'David','Beckham');
+INSERT INTO employee (emp_id, fname, lname, MANAGER_EMP_ID) VALUES( 401,'Gareth', 'Bale', 300);
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1026, 110, 401, 1200.23);
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1027, 111, 401, 1100.49);
+COMMIT;
+SELECT * FROM customer;
+SELECT * FROM employee;
+SELECT * FROM cust_order;
+
+
+-------------------------------------- QUESTION 2 ------------------------------------------------------
+
+SET AUTOCOMMIT OFF;
+INSERT INTO customer (cust_nbr, fname, lname) VALUES ( 112, 'Kim', 'Jong-un');
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1028, 112, 401, 200.20);
+ROLLBACK;
+SELECT * FROM customer;
+SELECT * FROM cust_order;
+
+
+-------------------------------------- QUESTION 3 ------------------------------------------------------
+
+-- FIRST OPTION 
+
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1036, 111, 401, 333.44);
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1037, 110, 401, 76.65);
+SAVEPOINT qthree;
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1036234567864, 110, 401, 22.54);
+SELECT * FROM cust_order;
+ROLLBACK TO qthree;
+SELECT * FROM cust_order;
+COMMIT;
+
+-- OPTION 2 
+
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1036, 111, 401, 333.44);
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1037, 110, 401, 76.65);
+INSERT INTO cust_order (order_nbr, cust_nbr, sales_emp_id, sale_price) VALUES(1036234567864, 110, 401, 22.54);
+SAVEPOINT qthree;
+SELECT * FROM cust_order;
+ROLLBACK TO qthree;
+SELECT * FROM cust_order;
+COMMIT;
+
+-------------------------------------- QUESTION 4 ------------------------------------------------------
+
+connect / as sysdba;
+CREATE USER q4 IDENTIFIED BY q4;
+GRANT CONNECT, CREATE SESSION TO q4;
+GRANT SELECT, INSERT, UPDATE, DELETE ON adoyle.employee TO q4;
+
+-- Below code to test the above worked
+
+connect q4;
+//enter password
+SELECT * FROM adoyle.employee;
+
+
+-------------------------------------- QUESTION 5 ------------------------------------------------------
+
+REVOKE DELETE ON adoyle.employee FROM q4;
+
+-- Below code to test the above worked
+
+connect q4;
+//enter password
+DELETE FROM adoyle.employee
+WHERE lname = ‘Monster’;
+
+-------------------------------------- QUESTION 6 ------------------------------------------------------
+
+SELECT cust_order.order_nbr, cust_order.sale_price, customer.fname AS first_name, customer.lname AS last_name 
+FROM customer INNER JOIN cust_order ON customer.cust_nbr = cust_order.cust_nbr
+WHERE SALE_PRICE =(SELECT min(sale_price) from cust_order);
+
+-------------------------------------- QUESTION 7 ------------------------------------------------------
+
+To be submitted as part of Lab Book 4, as discussed in class on 09th April 2013.
+
+
+
+
+
+
+
+
+
+
